@@ -1,8 +1,8 @@
 .collection-item {
   width: 22vw;
-  height: 350px;
   display: flex;
   flex-direction: column;
+  height: 350px;
   align-items: center;
   position: relative;
 
@@ -10,7 +10,7 @@
     width: 100%;
     height: 95%;
     background-size: cover;
-    background-position:  center;
+    background-position: center;
     margin-bottom: 5px;
   }
 
@@ -24,7 +24,7 @@
 
   &:hover {
     .image {
-      opacity: 0.8
+      opacity: 0.8;
     }
 
     .custom-button {
@@ -47,8 +47,6 @@
 
     .price {
       width: 10%;
-      margin-bottom: 15px;
     }
   }
-
 }

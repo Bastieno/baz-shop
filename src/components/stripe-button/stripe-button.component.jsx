@@ -1,7 +1,7 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 
-const StripeButton = ({ price }) => {
+const StripeCheckoutButton = ({ price }) => {
   const priceForStripe = price * 100;
   const publishableKey = 'pk_test_loSAUFN13BJfnSqpxX1LnWBb00t0Yxvgs4';
 
@@ -11,7 +11,6 @@ const StripeButton = ({ price }) => {
   }
 
   return (
-    <div>
       <StripeCheckout 
         label='Pay Now'
         name='Baz Clothing Ltd'
@@ -24,8 +23,7 @@ const StripeButton = ({ price }) => {
         token={onToken}
         stripeKey={publishableKey}
       />
-    </div>
   )
 }
 
-export default StripeButton;
+export default StripeCheckoutButton;
