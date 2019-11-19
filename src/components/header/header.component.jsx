@@ -7,7 +7,7 @@ import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import { auth } from '../../firebase/firebase.utils';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
-import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink } from './header.styles';
+import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink, OptionDiv } from './header.styles';
 
 const Header = ({ currentUser, hidden }) => (
   <HeaderContainer>
@@ -23,7 +23,7 @@ const Header = ({ currentUser, hidden }) => (
       </OptionLink>
       {
         currentUser ? 
-        <OptionLink as='div' className="option" onClick={() => auth.signOut()}> SIGN OUT </OptionLink> 
+        <OptionDiv className="option" onClick={() => auth.signOut()}> SIGN OUT </OptionDiv> 
         : <OptionLink className="option" to='/signin'>SIGN IN</OptionLink>
       }
       <CartIcon />
