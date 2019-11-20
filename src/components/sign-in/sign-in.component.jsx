@@ -17,24 +17,6 @@ class SignIn extends Component {
     const userData = { email, password };
     const { emailSignInStart } = this.props;
     emailSignInStart(userData);
-
-    // try {
-    //   await auth.signInWithEmailAndPassword(email, password);
-    //   this.setState({ 
-    //     email: '',
-    //     password: ''
-    //   })  
-    // } catch (error) {
-    //   // Handle Errors here.
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    //   if (errorCode === 'auth/wrong-password') {
-    //     alert('Wrong password.');
-    //   } else {
-    //     alert(errorMessage);
-    //   }
-    //   console.log(error);
-    // }
   }
 
   handleChange = (event) => {
@@ -71,9 +53,7 @@ class SignIn extends Component {
           <div className="buttons">
             <CustomButton type="submit"> Sign in </CustomButton>
             <CustomButton type='button' onClick={googleSignInStart} isGoogleSignIn >
-              {' '}
               Sign in with Google 
-              {' '}
             </CustomButton>
           </div>
 
