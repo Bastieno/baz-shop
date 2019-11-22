@@ -8,34 +8,34 @@ const StripeCheckoutButton = ({ price }) => {
 
   const onToken = token => {
     axios({
-      url: 'http://localhost:5000/payment',
+      url: 'payment',
       method: 'post',
       data: {
         amount: priceForStripe,
         token
       }
-    }).then( response => {
+    }).then(response => {
       alert('Payment successful');
-    }).catch( error => {
-      console.log('Payment error: ', JSON.parse(error));
+    }).catch(error => {
+      console.log('Payment error: ', error);
       alert('Payment failed. Please make sure you are entering the correct details')
     })
   }
 
   return (
-      <StripeCheckout 
-        label='Pay Now'
-        name='Baz Clothing Ltd'
-        billingAddress
-        shippingAddress
-        image='https://svgshare.com/i/Cuz.svg'
-        description={`Your total is $${price}`}
-        amount={priceForStripe}
-        panelLabel='Pay Now'
-        token={onToken}
-        stripeKey={publishableKey}
-      />
-  )
-}
+    <StripeCheckout
+      label="Pay Now"
+      name="Baz Clothing Ltd"
+      billingAddress
+      shippingAddress
+      image="https://svgshare.com/i/CUz.svg"
+      description={`Your total is $${price}`}
+      amount={priceForStripe}
+      panelLabel="Pay Now"
+      token={onToken}
+      stripeKey={publishableKey}
+    />
+  );
+};
 
 export default StripeCheckoutButton;
