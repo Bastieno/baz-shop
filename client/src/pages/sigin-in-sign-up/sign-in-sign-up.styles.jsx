@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SignInAndSignUpContainer = styled.div`
   width: 850px;
@@ -7,9 +7,12 @@ export const SignInAndSignUpContainer = styled.div`
   margin: 30px auto;
 
   @media screen and (max-width: 800px) {
-    width: auto;
-    display: flex;
+    width: unset;
     flex-direction: column;
-    margin: auto
+    align-items: center;
+
+    > *:first-child {
+      margin-bottom: 50px;
+    }
   }
 `;
