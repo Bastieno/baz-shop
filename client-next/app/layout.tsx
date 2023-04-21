@@ -1,16 +1,11 @@
-import { Open_Sans } from 'next/font/google';
+'use client';
+
+import { Provider } from 'react-redux';
+import { store } from '@/redux/store';
+import Head from './head';
+import StyledJsxRegistry from './lib/registry';
+
 import '../styles/globals.css';
-
-export const metadata = {
-  title: 'Baz-shop',
-  description: 'A simple app built using Nextjs',
-};
-
-const openSans = Open_Sans({
-  weight: ['300', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-});
 
 export default function RootLayout({
   children,
@@ -19,7 +14,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={openSans.className}>{children}</body>
+      <Head />
+      <body>
+        <StyledJsxRegistry>
+          <Provider store={store}>
+            {children}
+          </Provider>
+        </StyledJsxRegistry>
+      </body>
     </html>
   );
 }

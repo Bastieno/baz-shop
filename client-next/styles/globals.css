@@ -26,6 +26,7 @@ body {
 }
 
 body {
+  font-family: 'Open Sans Condensed', system-ui, -apple-system, BlinkMacSystemFont;
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
 }
