@@ -88,7 +88,7 @@ function SignIn() {
           <CustomButton
             type='button'
             onClick={() => signInWithGoogle()}
-            isGoogleSignIn
+            primary
           >
             {loadingFromSignInWithGoogle ? 'Loading...' : 'Sign in with Google'}
           </CustomButton>

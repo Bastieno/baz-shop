@@ -23,12 +23,16 @@ function UserAuth({ children }: { children: React.ReactNode }) {
           displayName: user.displayName,
         })
       );
-      router.push(pathname);
+      if (pathname === '/signin') {
+        router.push('/');
+      } else {
+        router.push(pathname);
+      }
     }
     if (error) {
       dispatch(userFailure(error));
     }
-  }, [user, error]);
+  }, [user, error, pathname]);
 
   if (loading)
     return (

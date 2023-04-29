@@ -1,3 +1,4 @@
+import { addItemToCart } from '@/redux/features/cart/cartSlice';
 import {
   CollectionItemContainer,
   CollectionFooterContainer,
@@ -6,20 +7,17 @@ import {
   NameContainer,
   PriceContainer,
 } from './styles';
-
-type Item = {
-  name: string;
-  imageUrl: string;
-  price: number;
-};
+import type { Item } from '@/utils/types';
+import { useAppDispatch } from '@/redux/hooks';
 
 type CollectionItemProps<Item> = {
   item: Item;
-  addItem?: (item: Item) => void;
 };
 
-function CollectionItem({ item, addItem }: CollectionItemProps<Item>) {
+function CollectionItem({ item }: CollectionItemProps<Item>) {
+  const dispatch = useAppDispatch();
   const { name, imageUrl, price } = item;
+
   return (
     <CollectionItemContainer>
       <BackgroundImage className='image' imageUrl={imageUrl} />
@@ -27,7 +25,7 @@ function CollectionItem({ item, addItem }: CollectionItemProps<Item>) {
         <NameContainer>{name}</NameContainer>
         <PriceContainer>{`$${price}`}</PriceContainer>
       </CollectionFooterContainer>
-      <AddButton onClick={() => {}} inverted>
+      <AddButton onClick={() => dispatch(addItemToCart(item))} inverted>
         Add to cart
       </AddButton>
     </CollectionItemContainer>

@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import categoryReducer from '@/redux/features/category/categorySlice';
 import userReducer from '@/redux/features/user/userSlice';
-import collectiosReducer from '@/redux/features/collections/collectionSlice';
+import collectionsReducer from '@/redux/features/collections/collectionSlice';
+import cartReducer from '@/redux/features/cart/cartSlice';
 
 export const store = configureStore({
   reducer: {
     categories: categoryReducer,
     user: userReducer,
-    collections: collectiosReducer,
+    collections: collectionsReducer,
+    cart: cartReducer
   },
 });
 

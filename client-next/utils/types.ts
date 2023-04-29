@@ -11,6 +11,12 @@ export type Value = {
   }>;
 };
 
+export type Item = Value['items'][0];
+
+export type CartItem = Item & {
+  quantity: number;
+};
+
 export type CollectionMap = {
   [x in Key]: Value;
 };

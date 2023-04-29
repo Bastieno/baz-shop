@@ -22,7 +22,9 @@ function SectionPage({ params: { section } }: SectionPageProps) {
   return (
     <>
       <Header />
-      <Collection collection={collection} />
+      <div className='px-10 py-5'>
+        <Collection collection={collection} />
+      </div>
     </>
   );
 }

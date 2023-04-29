@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import CustomButton from '../custom-button';
 
 export const CollectionItemContainer = styled.div`
-  width: 22vw;
   display: flex;
   flex-direction: column;
   height: 350px;
@@ -21,8 +20,6 @@ export const CollectionItemContainer = styled.div`
   }
 
   @media screen and (max-width: 800px) {
-    width: 40vw;
-
     &:hover {
       .image {
         opacity: unset;

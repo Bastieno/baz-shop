@@ -18,12 +18,18 @@ import { logout, userFailure } from '@/redux/features/user/userSlice';
 function Header() {
   const [isCartDropdownHidden, setIsCartDropdownHidden] = useState(true);
   const currentUser = useAppSelector((state) => state.user.currentUser);
+  const cartItems = useAppSelector(state => state.cart.cartItems)
   const dispatch = useAppDispatch();
 
   const auth = getAuth(app);
   const [signOut, loading, error] = useSignOut(auth);
 
   const toggleCartHidden = () => setIsCartDropdownHidden((prev) => !prev);
+  const itemCount = cartItems.reduce(
+    (acc, { quantity }) => acc + quantity,
+    0
+  );
+
   return (
     <HeaderContainer>
       <LogoContainer href='/'>
@@ -52,7 +58,7 @@ function Header() {
             SIGN IN
           </OptionLink>
         )}
-        <CartIcon itemCount={2} toggleCartHidden={toggleCartHidden} />
+        <CartIcon itemCount={itemCount} toggleCartHidden={toggleCartHidden} />
       </OptionsContainer>
       {isCartDropdownHidden ? null : <CartDropdown />}
     </HeaderContainer>

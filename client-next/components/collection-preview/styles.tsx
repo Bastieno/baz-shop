@@ -21,12 +21,21 @@ export const TitleContainer = styled.h1`
 `;
 
 export const PreviewContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+  width: 100%;
+
+  & > div {
+    margin-bottom: 30px;
+  }
 
   @media screen and (max-width: 800px) {
-    display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 15px;
+  }
+
+  @media screen and (max-width: 540px) {
+    grid-template-columns: 1fr;
   }
 `;
