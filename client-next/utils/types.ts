@@ -8,6 +8,7 @@ export type Value = {
     imageUrl: string;
     name: string;
     price: number;
+    priceId: string;
   }>;
 };
 
@@ -19,4 +20,10 @@ export type CartItem = Item & {
 
 export type CollectionMap = {
   [x in Key]: Value;
+};
+
+export type User = {
+  id: string;
+  displayName: string | null;
+  email: string;
 };

@@ -33,14 +33,14 @@ const cartSlice = createSlice({
         (cartItem) => cartItem.id === cartItemToRemove.id
       );
 
-      if (existingCartItem && existingCartItem?.quantity > 1) {
-        existingCartItem.quantity -= 1;
-      }
-
       if (existingCartItem?.quantity === 1) {
         state.cartItems = state.cartItems.filter(
           (cartItem) => cartItem.id !== cartItemToRemove.id
         );
+      }
+
+      if (existingCartItem && existingCartItem?.quantity > 1) {
+        existingCartItem.quantity -= 1;
       }
     },
     clearItemFromCart(state, action: PayloadAction<Item>) {

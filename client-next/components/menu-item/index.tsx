@@ -1,4 +1,5 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import type { Category } from '@/redux/features/category/categorySlice';
 
 import {
@@ -9,11 +10,12 @@ import {
   ContentSubtitle,
 } from './styles';
 
-type MenuItemsProps = Omit<Category, 'id'>
+type MenuItemsProps = Omit<Category, 'id'>;
 
-function MenuItems({ title, imageUrl, size }: MenuItemsProps) {
+function MenuItems({ title, imageUrl, size, linkUrl }: MenuItemsProps) {
+  const router = useRouter();
   return (
-    <MenuItemContainer size={size}>
+    <MenuItemContainer size={size} onClick={() => router.push(linkUrl)}>
       <BackgroundImageContainer
         className='background-image'
         imageUrl={imageUrl}

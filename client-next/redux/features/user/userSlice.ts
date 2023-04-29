@@ -1,6 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { User } from '@/utils/types';
 
-const initialState = {
+type State = {
+  currentUser: User | null;
+  error: string | null;
+};
+
+const initialState: State = {
   currentUser: null,
   error: null,
 };
@@ -9,19 +15,19 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    userSuccess(state, action) {
+    userSuccess(state, action: PayloadAction<User>) {
       state.currentUser = action.payload;
       state.error = null;
     },
-    userFailure(state, action) {
-      state.error = action.payload
+    userFailure(state, action: PayloadAction<string>) {
+      state.error = action.payload;
     },
     logout(state) {
       state.currentUser = null;
       state.error = null;
-    }
-  }
-})
+    },
+  },
+});
 
 export const { userSuccess, userFailure, logout } = userSlice.actions;
 export default userSlice.reducer;
