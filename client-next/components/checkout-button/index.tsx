@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 
 import CustomButton from '../custom-button';
 import { useAppSelector } from '@/redux/hooks';
-import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 
 // Call `loadStripe` outside of the component render to avoid
 // recreating the `Stripe` object on every render.
@@ -14,6 +15,9 @@ function CheckoutButton() {
   const [isLoadingStripeSession, setIsLoadingStripeSession] = useState(false);
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const user = useAppSelector((state) => state.user.currentUser);
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleCheckout = async () => {
     try {
@@ -37,6 +41,17 @@ function CheckoutButton() {
       setIsLoadingStripeSession(false);
     }
   };
+
+  if (!user) {
+    return (
+      <CustomButton
+        type='button'
+        onClick={() => router.push(`/signin?redirectUri=${pathname}`)}
+      >
+        Login to checkout
+      </CustomButton>
+    );
+  }
 
   return (
     <CustomButton

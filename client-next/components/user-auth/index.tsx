@@ -1,19 +1,34 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { userFailure, userSuccess } from '@/redux/features/user/userSlice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { app } from '@/utils/firebase';
-import { usePathname, useRouter } from 'next/navigation';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { userFailure, userSuccess } from '@/redux/features/user/userSlice';
 
 function UserAuth({ children }: { children: React.ReactNode }) {
-  const currentUser = useAppSelector(state => state.user.currentUser);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const pathname = usePathname();
 
+  const searchParams = useSearchParams();
+  const redirectUri = searchParams.get('redirectUri');
+
   const auth = getAuth(app);
   const [user, loading, error] = useAuthState(auth);
+
+  const userNextRoute = useCallback(() => {
+    if (pathname === '/signin') {
+      if (redirectUri) {
+        router.push(redirectUri);
+      } else {
+        router.push('/');
+      }
+    } else {
+      router.push(pathname);
+    }
+  }, [pathname, redirectUri]);
 
   useEffect(() => {
     if (user) {
@@ -24,16 +39,13 @@ function UserAuth({ children }: { children: React.ReactNode }) {
           displayName: user.displayName,
         })
       );
-      if (pathname === '/signin') {
-        router.push('/');
-      } else {
-        router.push(pathname);
-      }
+      userNextRoute();
     }
+
     if (error) {
       dispatch(userFailure(error.message));
     }
-  }, [user, error, pathname]);
+  }, [user, error, userNextRoute]);
 
   if (currentUser) {
     return <>{children}</>;
