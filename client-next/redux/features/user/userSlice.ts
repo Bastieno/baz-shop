@@ -1,14 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { User } from '@/utils/types';
+import { FirebaseError } from 'firebase/app';
 
+
+FirebaseError
 type State = {
   currentUser: User | null;
-  error: string | null;
+  error: string | undefined;
 };
 
 const initialState: State = {
   currentUser: null,
-  error: null,
+  error: undefined,
 };
 
 const userSlice = createSlice({
@@ -17,14 +20,14 @@ const userSlice = createSlice({
   reducers: {
     userSuccess(state, action: PayloadAction<User>) {
       state.currentUser = action.payload;
-      state.error = null;
+      state.error = undefined;
     },
-    userFailure(state, action: PayloadAction<string>) {
+    userFailure(state, action: PayloadAction<string | undefined>) {
       state.error = action.payload;
     },
     logout(state) {
       state.currentUser = null;
-      state.error = null;
+      state.error = undefined;
     },
   },
 });

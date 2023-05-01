@@ -1,7 +1,8 @@
 'use client';
 
+import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import { store } from '@/redux/store';
+import { persistor, store } from '@/redux/store';
 import Head from './head';
 import StyledJsxRegistry from './lib/registry';
 import UserAuth from '@/components/user-auth';
@@ -19,9 +20,16 @@ export default function RootLayout({
       <body>
         <StyledJsxRegistry>
           <Provider store={store}>
-            <UserAuth>
-              {children}
-            </UserAuth>
+            <PersistGate
+              loading={
+                <div className='w-[100%] h-screen flex items-center justify-center'>
+                  Loading...
+                </div>
+              }
+              persistor={persistor}
+            >
+              <UserAuth>{children}</UserAuth>
+            </PersistGate>
           </Provider>
         </StyledJsxRegistry>
       </body>

@@ -39,6 +39,12 @@ function Checkout() {
     }
   }, []);
 
+  useEffect(() => {
+    if (isCheckoutSuccessful) {
+      dispatch(clearCart())
+    }
+  }, [isCheckoutSuccessful])
+
   if (isCheckoutSuccessful) {
     return (
       <div className='w-[100%] h-[70vh] flex flex-col items-center justify-center'>

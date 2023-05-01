@@ -47,7 +47,7 @@ function Header() {
                 dispatch(logout());
                 alert('You are signed out');
               } else {
-                dispatch(userFailure(error));
+                dispatch(userFailure(error?.message));
               }
             }}
           >

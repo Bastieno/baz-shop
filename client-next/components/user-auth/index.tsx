@@ -2,11 +2,12 @@ import { useEffect } from 'react';
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { userFailure, userSuccess } from '@/redux/features/user/userSlice';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { app } from '@/utils/firebase';
 import { usePathname, useRouter } from 'next/navigation';
 
 function UserAuth({ children }: { children: React.ReactNode }) {
+  const currentUser = useAppSelector(state => state.user.currentUser);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const pathname = usePathname();
@@ -19,7 +20,7 @@ function UserAuth({ children }: { children: React.ReactNode }) {
       dispatch(
         userSuccess({
           id: user.uid,
-          email: user.email,
+          email: user.email as string,
           displayName: user.displayName,
         })
       );
@@ -30,9 +31,13 @@ function UserAuth({ children }: { children: React.ReactNode }) {
       }
     }
     if (error) {
-      dispatch(userFailure(error));
+      dispatch(userFailure(error.message));
     }
   }, [user, error, pathname]);
+
+  if (currentUser) {
+    return <>{children}</>;
+  }
 
   if (loading)
     return (
