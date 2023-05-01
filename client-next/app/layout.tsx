@@ -1,5 +1,6 @@
 'use client';
 
+import { ToastContainer } from 'react-toastify';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { persistor, store } from '@/redux/store';
@@ -8,6 +9,7 @@ import StyledJsxRegistry from './lib/registry';
 import UserAuth from '@/components/user-auth';
 
 import '../styles/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function RootLayout({
   children,
@@ -28,6 +30,18 @@ export default function RootLayout({
               }
               persistor={persistor}
             >
+              <ToastContainer
+                position='top-right'
+                autoClose={5000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='dark'
+              />
               <UserAuth>{children}</UserAuth>
             </PersistGate>
           </Provider>

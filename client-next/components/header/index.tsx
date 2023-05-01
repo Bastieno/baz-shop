@@ -14,21 +14,19 @@ import CartDropdown from '../cart-dropdown';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { app } from '@/utils/firebase';
 import { logout, userFailure } from '@/redux/features/user/userSlice';
+import { toast } from 'react-toastify';
 
 function Header() {
   const [isCartDropdownHidden, setIsCartDropdownHidden] = useState(true);
   const currentUser = useAppSelector((state) => state.user.currentUser);
-  const cartItems = useAppSelector(state => state.cart.cartItems)
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
   const dispatch = useAppDispatch();
 
   const auth = getAuth(app);
   const [signOut, loading, error] = useSignOut(auth);
 
   const toggleCartHidden = () => setIsCartDropdownHidden((prev) => !prev);
-  const itemCount = cartItems.reduce(
-    (acc, { quantity }) => acc + quantity,
-    0
-  );
+  const itemCount = cartItems.reduce((acc, { quantity }) => acc + quantity, 0);
 
   return (
     <HeaderContainer>
@@ -45,7 +43,7 @@ function Header() {
               const success = await signOut();
               if (success) {
                 dispatch(logout());
-                alert('You are signed out');
+                toast(<p className='toast-text'>You are signed out</p>);
               } else {
                 dispatch(userFailure(error?.message));
               }

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { app } from '@/utils/firebase';
+import { toast } from 'react-toastify';
 
 import FormInput from '../form-input';
 import CustomButton from '../custom-button';
@@ -29,7 +30,7 @@ function SignUp() {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords don't match");
+      toast.error(<p className='toast-text'>Passwords don't match</p>);
       return;
     }
 

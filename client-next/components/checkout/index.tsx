@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import CheckoutButton from '../checkout-button';
 import CustomButton from '../custom-button';
 import { clearCart } from '@/redux/features/cart/cartSlice';
+import { toast } from 'react-toastify';
 
 function Checkout() {
   const dispatch = useAppDispatch();
@@ -31,14 +32,13 @@ function Checkout() {
 
   useEffect(() => {
     if (isCheckoutCanceled) {
-      alert(
-        'Order canceled -- continue to shop around and checkout when you are ready.'
-      );
+      toast.info(<p className='toast-text'>Order canceled</p>);
     }
   }, [isCheckoutCanceled]);
 
   useEffect(() => {
     if (isCheckoutSuccessful) {
+      toast.success(<p className='toast-text'>Payment was successful</p>);
       dispatch(clearCart());
     }
   }, [isCheckoutSuccessful]);
