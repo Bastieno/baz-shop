@@ -2,9 +2,14 @@
 
 # dependencies
 /client/node_modules
+/client-next/node_modules
 /server/node_modules
 /.pnp
 .pnp.js
+
+# next.js
+/client-next/.next/
+/client-next/out/
 
 # testing
 /coverage
@@ -20,6 +25,7 @@ client/build
 .env.test.local
 .env.production.local
 /server/.env
+/client-next/.vscode
 
 npm-debug.log*
 yarn-debug.log*

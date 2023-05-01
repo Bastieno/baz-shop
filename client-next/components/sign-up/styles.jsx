@@ -1,17 +1,18 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SignUpContainer = styled.div`
-  width: 380px;
   display: flex;
   flex-direction: column;
+  width: 360px;
 
   @media screen and (max-width: 800px) {
-    width: 360px;
     margin: 10px auto 50px;
   }
 `;
 
 export const SignUpTitle = styled.h2`
+  font-size: 1.5rem;
+  font-weight: bold;
   margin: 10px 0;
 `;
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SignUpContainer = styled.div`
+export const SignInContainer = styled.div`
   width: 380px;
   display: flex;
   flex-direction: column;
@@ -11,11 +11,13 @@ export const SignUpContainer = styled.div`
   }
 `;
 
-export const SignUpTitle = styled.h2`
+export const SignInTitle = styled.h2`
+  font-size: 1.5rem;
+  font-weight: bold;
   margin: 10px 0;
 `;
 
-export const ButtonContainer = styled.div`
+export const ButtonsBarContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 `;
