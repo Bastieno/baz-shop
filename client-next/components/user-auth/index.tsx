@@ -26,7 +26,9 @@ function UserAuth({ children }: { children: React.ReactNode }) {
         router.push('/');
       }
     } else {
-      router.push(pathname);
+      const params = new URLSearchParams(searchParams).toString();
+      const newPathname = params ? `${pathname}?${params}` : pathname;
+      router.push(newPathname);
     }
   }, [pathname, redirectUri]);
 

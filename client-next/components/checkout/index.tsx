@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 import CheckoutItem from '../checkout-item';
 import {
@@ -15,7 +16,6 @@ import CustomButton from '../custom-button';
 import { clearCart } from '@/redux/features/cart/cartSlice';
 
 function Checkout() {
-  const [isCheckoutSuccessful, setisCheckoutSuccessful] = useState(false);
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const total = useMemo(() => {
@@ -25,25 +25,23 @@ function Checkout() {
     );
   }, [cartItems]);
 
-  useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-    if (query.get('success')) {
-      setisCheckoutSuccessful(true);
-    }
+  const searchParams = useSearchParams();
+  const isCheckoutCanceled = searchParams.get('canceled');
+  const isCheckoutSuccessful = searchParams.get('success');
 
-    if (query.get('canceled')) {
+  useEffect(() => {
+    if (isCheckoutCanceled) {
       alert(
         'Order canceled -- continue to shop around and checkout when you are ready.'
       );
     }
-  }, []);
+  }, [isCheckoutCanceled]);
 
   useEffect(() => {
     if (isCheckoutSuccessful) {
-      dispatch(clearCart())
+      dispatch(clearCart());
     }
-  }, [isCheckoutSuccessful])
+  }, [isCheckoutSuccessful]);
 
   if (isCheckoutSuccessful) {
     return (
